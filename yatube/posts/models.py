@@ -6,7 +6,7 @@ User = get_user_model()
 
 class Group(models.Model):
     title = models.CharField(
-        max_length=200,
+        max_length=20,
         verbose_name='Заголовок',
     )
 
@@ -28,7 +28,7 @@ class Group(models.Model):
 
 class Post(models.Model):
     text = models.TextField(
-        max_length=600,
+        max_length=1000,
         verbose_name='Текст поста',
     )
 

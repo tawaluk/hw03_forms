@@ -31,10 +31,12 @@
         </li>
       </ul>
     </aside>
-    <article class="col-12 col-md-9">
-      <p>{{ post }}</p> 
-      {% if post.author == user %} 
-        <a class="btn btn-primary" href="{% url 'posts:edit' post.id %}">редактировать запись</a>
+    <article class="col-12 col-md-9";>
+      <div class="post-in-post-detail">
+        <p>{{ post }}</p>
+      </div>
+      {% if post.author == user %}
+        <center> <a class="btn btn-primary" href="{% url 'posts:edit' post.id %}">редактировать запись</a>
       {% endif %}
     </article>
   </div>
