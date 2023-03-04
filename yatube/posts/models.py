@@ -28,7 +28,8 @@ class Group(models.Model):
 
 class Post(models.Model):
     text = models.TextField(
-        verbose_name='Текст поста'
+        max_length=600,
+        verbose_name='Текст поста',
     )
 
     pub_date = models.DateTimeField(
