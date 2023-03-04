@@ -8,19 +8,19 @@ class Group(models.Model):
     title = models.CharField(
         max_length=200,
         verbose_name='Заголовок',
-        )
-    
+    )
+
     slug = models.SlugField(unique=True)
 
     description = models.TextField(
         max_length=400,
         verbose_name='Описание группы',
         help_text="введите описание группы (максимум 400 символов)"
-        )
+    )
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         verbose_name_plural = 'Группы'
         verbose_name = 'группы'
@@ -34,8 +34,8 @@ class Post(models.Model):
     pub_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата публикации',
-        )
-    
+    )
+
     author = models.ForeignKey(
         User,
         max_length=30,
