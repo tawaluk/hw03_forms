@@ -1,15 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PostForm
 from .models import Group, Post, User
 
-NUM_OF_POSTS = 10
 
-
-def utils(queryset, request):
-    paginator = Paginator(queryset, NUM_OF_POSTS)
+def addition_paginator(queryset, request):
+    # Внедрение паджинатора
+    paginator = Paginator(queryset, settings.NUM_OF_POSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return {'page_obj': page_obj}
@@ -19,34 +19,35 @@ def index(request):
     # Главная страница
     post_list = Post.objects.all()
     template = 'posts/index.html'
-    context_title = utils(post_list, request)
+    context_title = addition_paginator(post_list, request)
     return render(request, template, context_title)
 
 
 def group_posts(request, slug):
     # Групповая страница
     group = get_object_or_404(Group, slug=slug)
-    goup_list_post = group.posts.all()
+    groups = group.posts.all()
     template = 'posts/group_list.html'
     context = {
         'group': group,
-        'posts': goup_list_post,
+        'posts': groups,
     }
-    context.update(utils(goup_list_post, request))
+    context.update(addition_paginator(groups, request))
     return render(request, template, context)
 
 
 def profile(request, username):
     # Страница профиля
     author = get_object_or_404(User, username=username)
-    post_list = author.posts.all()
+    posts = author.posts.all()
     template = 'posts/profile.html'
     context = {'author': author}
-    context.update(utils(post_list, request))
+    context.update(addition_paginator(posts, request))
     return render(request, template, context)
 
 
 def post_detail(request, post_id):
+    # Подробная информация о посте
     post = get_object_or_404(Post, id=post_id)
     template = 'posts/post_detail.html'
     context = {'post': post}
