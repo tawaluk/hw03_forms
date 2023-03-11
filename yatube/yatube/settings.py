@@ -3,7 +3,13 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gk*0y3%!c_(8%hdfvw!d*ll7rd)!y^ez4htx%$=hudxx-gqf*1'
 DEBUG = True
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
+]
 
 INSTALLED_APPS = [
     'about.apps.AboutConfig',
